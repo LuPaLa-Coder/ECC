@@ -38,7 +38,7 @@ Before marking code complete:
 
 ## Security Review Triggers
 
-**STOP and use security-reviewer agent when:**
+**STOP and use the SharpGuard agent when:**
 
 - Authentication or authorization code
 - User input handling
@@ -59,16 +59,13 @@ Before marking code complete:
 
 ## Agent Usage
 
-Use these agents for code review:
+Use these agents for code review (see [agents.md](agents.md) for the full roster):
 
 | Agent | Purpose |
 |-------|---------|
-| **code-reviewer** | General code quality, patterns, best practices |
-| **security-reviewer** | Security vulnerabilities, OWASP Top 10 |
-| **typescript-reviewer** | TypeScript/JavaScript specific issues |
-| **python-reviewer** | Python specific issues |
-| **go-reviewer** | Go specific issues |
-| **rust-reviewer** | Rust specific issues |
+| **Anubis** | General C# code quality, patterns, best practices |
+| **SharpGuard** | Security vulnerabilities, OWASP Top 10, in C# |
+| **Anubis-devops** | Azure DevOps YAML pipeline review |
 
 ## Review Workflow
 

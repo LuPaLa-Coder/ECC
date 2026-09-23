@@ -11,7 +11,9 @@ paths:
 ## Test Framework
 
 - Prefer **xUnit** for unit and integration tests
-- Use **FluentAssertions** for readable assertions
+- Use **FluentAssertions** for readable assertions — pin to `7.x`: from `8.0.0`
+  the license changed to Xceed Community, which is not free for commercial use;
+  `7.2.2` is the last Apache-2.0 release
 - Use **Moq** or **NSubstitute** for mocking dependencies
 - Use **Testcontainers** when integration tests need real infrastructure
 
