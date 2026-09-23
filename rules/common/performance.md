@@ -48,8 +48,8 @@ For complex tasks requiring deep reasoning:
 
 ## Build Troubleshooting
 
-If build fails:
-1. Use **build-error-resolver** agent
-2. Analyze error messages
+If `dotnet build` fails:
+1. Read the compiler/analyzer output directly — it names the file and line
+2. Fix through **Vulcan-Dispatch**, like any other C# change
 3. Fix incrementally
-4. Verify after each fix
+4. Verify with `dotnet build` after each fix

@@ -19,39 +19,46 @@ MANDATORY workflow:
 
 ## Troubleshooting Test Failures
 
-1. Use **tdd-guide** agent
+1. Use the **test-driven-development** skill (superpowers)
 2. Check test isolation
 3. Verify mocks are correct
 4. Fix implementation, not tests (unless tests are wrong)
 
 ## Agent Support
 
-- **tdd-guide** - Use PROACTIVELY for new features, enforces write-tests-first
+- The **test-driven-development** skill (superpowers) - use PROACTIVELY for new features, enforces write-tests-first
 
 ## Test Structure (AAA Pattern)
 
-Prefer Arrange-Act-Assert structure for tests:
+Prefer Arrange-Act-Assert structure for tests (see [csharp/testing.md](../csharp/testing.md) for the xUnit/FluentAssertions framework choice):
 
-```typescript
-test('calculates similarity correctly', () => {
-  // Arrange
-  const vector1 = [1, 0, 0]
-  const vector2 = [0, 1, 0]
+```csharp
+[Fact]
+public void CalculatesSimilarity_ReturnsZero_ForOrthogonalVectors()
+{
+    // Arrange
+    var vector1 = new[] { 1, 0, 0 };
+    var vector2 = new[] { 0, 1, 0 };
 
-  // Act
-  const similarity = calculateCosineSimilarity(vector1, vector2)
+    // Act
+    var similarity = CosineSimilarity.Calculate(vector1, vector2);
 
-  // Assert
-  expect(similarity).toBe(0)
-})
+    // Assert
+    similarity.Should().Be(0);
+}
 ```
 
 ### Test Naming
 
 Use descriptive names that explain the behavior under test:
 
-```typescript
-test('returns empty array when no markets match query', () => {})
-test('throws error when API key is missing', () => {})
-test('falls back to substring search when Redis is unavailable', () => {})
+```csharp
+[Fact]
+public void FindCandidates_ReturnsEmptyList_WhenNoCardsMatchQuery() { }
+
+[Fact]
+public void Constructor_ThrowsArgumentException_WhenApiKeyIsMissing() { }
+
+[Fact]
+public void SearchByName_FallsBackToSubstringSearch_WhenIndexIsUnavailable() { }
 ```

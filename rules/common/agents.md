@@ -2,36 +2,32 @@
 
 ## Available Agents
 
-ECC agents ship with the `ecc@ecc` plugin, not in `~/.claude/agents/`.
-They are invoked through the Agent tool with a plugin-scoped `subagent_type`:
-
-```text
-Agent(subagent_type: "ecc:planner", prompt: "...")
-```
+This is a C#/.NET-only fork: the `ecc@ecc` plugin's own agents (`ecc:planner`,
+`ecc:architect`, etc.) stay disabled here to avoid overlapping with the
+project-specific roster below, defined in `~/.claude/agents/`:
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
-| ecc:planner | Implementation planning | Complex features, refactoring |
-| ecc:architect | System design | Architectural decisions |
-| ecc:tdd-guide | Test-driven development | New features, bug fixes |
-| ecc:code-reviewer | Code review | After writing code |
-| ecc:security-reviewer | Security analysis | Before commits |
-| ecc:build-error-resolver | Fix build errors | When build fails |
-| ecc:e2e-runner | E2E testing | Critical user flows |
-| ecc:refactor-cleaner | Dead code cleanup | Code maintenance |
-| ecc:doc-updater | Documentation | Updating docs |
-| ecc:rust-reviewer | Rust code review | Rust projects |
-| ecc:harmonyos-app-resolver | HarmonyOS app development | HarmonyOS/ArkTS projects |
-
-For the full roster of 68 agents, see `/ecc:ecc-guide`.
+| Vulcan-Dispatch | Entry point for C# generation/modification | Any .NET code-gen task; detects Generic/AWS/Azure and routes to the right Vulcan |
+| Vulcan-Core / Vulcan-AWS / Vulcan-Azure | Target-specific C# generation | Once Vulcan-Dispatch (or you) has picked the target |
+| Vulcan-Patterns | Advanced architectural patterns | CQRS, SignalR, GraphQL and similar, not plain CRUD |
+| Vulcan-SCA | NuGet dependency scanning + remediation | SCA sweeps, vulnerable/deprecated/outdated packages |
+| Anubis | Structured .NET code review | After writing or modifying C# code |
+| Anubis-devops | Azure DevOps YAML pipeline security review | Pipeline changes |
+| Anubis-Arch / Anubis-Runtime / Anubis-GreenOps | Architecture governance, performance, cloud cost | Deeper analysis passes, not every review |
+| SharpGuard | C# security vulnerability detection + fix | Security-sensitive code (auth, payments, user data) |
 
 ## Immediate Agent Usage
 
 No user prompt needed:
-1. Complex feature requests - Use **ecc:planner** agent
-2. Code just written/modified - Use **ecc:code-reviewer** agent
-3. Bug fix or new feature - Use **ecc:tdd-guide** agent
-4. Architectural decision - Use **ecc:architect** agent
+1. C# code to generate or modify - Use **Vulcan-Dispatch** (it routes onward)
+2. Code just written/modified - Use **Anubis** agent
+3. Security-sensitive C# code - Use **SharpGuard** agent
+4. NuGet dependency sweep - Use **Vulcan-SCA** agent
+
+Exceptions: skip delegation for purely conceptual questions, for reading or
+explaining existing code, or when the user explicitly asks to proceed without
+a subagent.
 
 ## Parallel Task Execution
 
